@@ -16,18 +16,17 @@ def get_message():
 
     response = requests.get(url, headers=HEADERS)
 
-    print(response.text)
+    logger.info(response.text)
     return response.status_code
 
 def post_message():
     url = "https://rw.vestaboard.com/"
     data = {
-        "text": "Hello World 2"
+        "text": "Hello World !!!"
     }
 
     response = requests.post(url, headers=HEADERS, data=json.dumps(data))
-
-    print(response.text)
+    logger.info(response.text)
     return response.status_code
 
 if __name__ == "__main__":
