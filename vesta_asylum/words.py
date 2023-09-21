@@ -19,7 +19,11 @@ ADJECTIVES = [
     "botched",
     "oozing",
     "deteriorated",
-    "abominable"
+    "abominable",
+    "unadvisable",
+    "experimental",
+    "unforeseen",
+    "questionable"
 ]
 
 BODY_PARTS = [
