@@ -2,6 +2,7 @@ import vestaboard
 import sys
 from loguru import logger
 import random
+from datetime import datetime
 
 from . import ENV
 from .words import ADJECTIVES, BODY_PARTS, PROCEDURES
@@ -21,5 +22,8 @@ if __name__ == "__main__":
         ENV["KEY"], ENV["SECRET"], saveCredentials=False
     )
     board = vestaboard.Board(installation)
+    now = datetime.now()
+    date = now.strftime("%m.%d.%Y")
+    time = now.strftime("%I:%M%p")
     procedure = _get_proc_body_adj()
-    board.post(f"{name}'s\n{procedure[0]}\n{procedure[1]}\n{procedure[2]}")
+    board.post(f"EMERGENCY PROCEDURES\n{date} {time}\n\nPATIENT: {name}\n{procedure[0]} {procedure[1]}\n{procedure[2]}")
