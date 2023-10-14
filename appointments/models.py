@@ -11,12 +11,13 @@ from django.contrib import admin
 from django.db import models
 from django.utils import timezone
 
+
 class Appointments(models.Model):
-    question_text = models.CharField(max_length=200)
+    appointment = models.CharField(max_length=132)
     post_date = models.DateTimeField("time posted")
 
     def __str__(self):
-        return self.question_text
+        return self.appointment
 
     @admin.display(
         boolean=True,
