@@ -1,6 +1,6 @@
 from django import forms
 
 
-class InputForm(forms.Form):
+class PatientNameForm(forms.Form):
 
 	patient_name = forms.CharField(max_length = 13)

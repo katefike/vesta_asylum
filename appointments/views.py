@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 
-from .forms import InputForm
+from .forms import PatientNameForm
 
 
 def index(request):
@@ -14,5 +14,5 @@ def index(request):
         if 'choosing' in request.POST:
             return HttpResponse(f'Ok {patient_name}...we\'ll let you choose...this time.')      
     context ={}
-    context['form']= InputForm()
+    context['form']= PatientNameForm()
     return render(request, "appointments/index.html", context)
