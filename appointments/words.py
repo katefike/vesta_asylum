@@ -68,7 +68,6 @@ PROCEDURES = [
     "tuck",
     "bifurcation",
     "blast",
-    "scootch",
     "tweak",
     "rearrangement",
     "perforation",
@@ -80,4 +79,8 @@ PROCEDURES = [
     "augmentation",
     "peel",
     "fusion",
+    "psychotherapy",
+    "group therapy",
+    "hypnotism",
+    "regression therapy"
 ]
