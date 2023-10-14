@@ -6,8 +6,8 @@ from .forms import InputForm
 
 def index(request):
     if request.method == 'POST':
-        first_name = request.POST['first_name']
-        return HttpResponse(f'Hi {first_name}!')
+        patient_name = request.POST['patient_name']
+        return HttpResponse(f'Hi {patient_name}!')
     context ={}
     context['form']= InputForm()
     return render(request, "appointments/index.html", context)
