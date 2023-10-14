@@ -4,8 +4,7 @@
 	<table>
 		{{ form.as_table }}
 	</table>
-	<input name="random" type="submit" value="I'm too crazy...choose my procedure for me!" hx-post="." hx-target="#response" hx-swap="innerHTML">
-	<input name="choosing" type="submit" value="I'm a control freak...let me choose." hx-post="." hx-target="#response" hx-swap="innerHTML">
+	<input type="submit" value="Submit" hx-post="." hx-target="#response" hx-swap="innerHTML">
 </form>
 <div id="response"></div>
 
