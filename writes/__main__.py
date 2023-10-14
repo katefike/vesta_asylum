@@ -1,8 +1,9 @@
-import vestaboard
-import sys
-from loguru import logger
 import random
+import sys
 from datetime import datetime
+
+import vestaboard
+from loguru import logger
 
 from . import ENV
 from .words import ADJECTIVES, BODY_PARTS, PROCEDURES
