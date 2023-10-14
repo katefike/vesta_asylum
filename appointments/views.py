@@ -4,6 +4,7 @@ from datetime import datetime
 import vestaboard
 from django.http import HttpResponse
 from django.shortcuts import render
+from typing import Tuple
 
 from . import ENV
 from .forms import PatientNameForm
@@ -28,17 +29,21 @@ def post_appointment(patient_name):
     procedure = _get_proc_body_adj()
     appointment = f"EMERGENCY PROCEDURES\n{date} {time}\n\nPATIENT: {patient_name}\n{procedure[0]} {procedure[1]}\n{procedure[2]}"
     board.post(appointment)
-    return appointment
+    return appointment, now
+
+def insert_appointment(response: Tuple):
+    return
+
 
 def index(request):
     if request.method == 'POST':
         patient_name = request.POST['patient_name']
         if not patient_name:
             return HttpResponse('Please enter your name and press "Submit"...and we will make you submit.')
-        appointment = post_appointment(patient_name)
-        if not appointment:
+        response = post_appointment(patient_name)
+        if not response[0]:
             return HttpResponse(f'FAILED to schedule an appointment for {patient_name}.')
-        return HttpResponse(f'Successfully scheduled an appointment: {appointment}.')
+        return HttpResponse(f'Successfully scheduled an appointment: {response[0]}.')
     context ={}
     context['form']= PatientNameForm()
     return render(request, "appointments/index.html", context)
