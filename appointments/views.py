@@ -9,7 +9,10 @@ def index(request):
         patient_name = request.POST['patient_name']
         if not patient_name:
             return HttpResponse('Please enter your name and press submit...and we will make you submit.')
-        return HttpResponse(f'Successfully scheduled an appointment for {patient_name}.')
+        if 'random' in request.POST:
+            return HttpResponse(f'Successfully scheduled an appointment for {patient_name}.')
+        if 'choosing' in request.POST:
+            return HttpResponse(f'Ok {patient_name}...we\'ll let you choose...this time.')      
     context ={}
     context['form']= InputForm()
     return render(request, "appointments/index.html", context)
