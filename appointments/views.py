@@ -1,6 +1,10 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 
+from .forms import InputForm
+
 
 def index(request):
-    return HttpResponse("Hello, world. You're at the appointments index.")
+    context ={}
+    context['form']= InputForm()
+    return render(request, "appointments/index.html", context)
