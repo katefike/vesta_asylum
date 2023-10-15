@@ -1,5 +1,5 @@
 import random
-from datetime import datetime
+from datetime import datetime, timedelta
 from typing import Tuple
 
 import vestaboard
@@ -42,16 +42,21 @@ def insert_appointment_post(appointment: str):
 
 def index(request):
     if request.method == 'POST':
+        delta = AppointmentPosts.latest_post_time_delta()
+        if delta < timedelta(minutes=2):
+            remaining_time = timedelta(minutes=2) - delta
+            remaining_seconds = int(remaining_time.total_seconds())
+            return HttpResponse(f'An appointment stays on the board for 2 minutes. Re-submit in {remaining_seconds} seconds.')
+
         patient_name = request.POST['patient_name']
         if not patient_name:
-            return HttpResponse('Please enter your name and press "Submit"...and we will make you submit.')
+            return HttpResponse('Enter your name and press "Submit"...and we will make you submit.')
 
         appointment = post_appointment(patient_name)
+
         if not appointment:
             return HttpResponse(f'FAILED to schedule an appointment for {patient_name}.')
 
-        delta = AppointmentPosts.latest_post_time_delta()
-        print(f"DELTA: {delta}")
         insert_appointment_post(appointment)
         return HttpResponse(f'Successfully scheduled an appointment: {appointment}.')
     context ={}
