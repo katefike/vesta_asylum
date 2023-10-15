@@ -26,6 +26,7 @@ sqlparse==0.4.4
 tomli==2.0.1
 tomli_w==1.0.0
 typer==0.7.0
+typing==3.7.4.3
 typing_extensions==4.8.0
 urllib3==2.0.5
 Vestaboard==1.2.4
