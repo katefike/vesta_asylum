@@ -1,10 +1,25 @@
-<script src="https://unpkg.com/htmx.org@1.9.6" integrity="sha384-FhXw7b6AlE/jyjlZH5iHa/tTe9EpJ1Y55RjcgPbjeWMskSxZt1v9qkxLJWNJaGni" crossorigin="anonymous"></script>
-<form action = "" method = "post">
-	{% csrf_token %}
-	<table>
-		{{ form.as_table }}
-	</table>
-	<input type="submit" value="Submit" hx-post="." hx-target="#response" hx-swap="innerHTML">
-</form>
-<div id="response"></div>
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/htmx.org@1.9.6" integrity="sha384-FhXw7b6AlE/jyjlZH5iHa/tTe9EpJ1Y55RjcgPbjeWMskSxZt1v9qkxLJWNJaGni" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+</head>
+
+<!-- {% load static %}
+<link rel="stylesheet" href="{% static 'appointments/style.css' %}"> -->
+<body>
+	<div class="lg:content-auto">
+		<form action = "" method = "post">
+			{% csrf_token %}
+			<table>
+				{{ form.as_table }}
+			</table>
+			<input type="submit" value="Submit" hx-post="." hx-target="#response" hx-swap="innerHTML">
+		</form>
+		<div id="response"></div>
+	</div>
+</body>
 
