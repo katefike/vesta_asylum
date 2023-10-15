@@ -12,18 +12,18 @@ from django.db import models
 from django.utils import timezone
 
 
-class Appointments(models.Model):
+class AppointmentPosts(models.Model):
     appointment = models.CharField(max_length=132)
     post_time = models.DateTimeField("time posted")
 
-    def __str__(self):
-        return self.appointment
+    # def __str__(self):
+    #     return self.appointment
 
-    @admin.display(
-        boolean=True,
-        ordering="post_time",
-        description="Posted recently?",
-    )
-    def was_posted_recently(self):
-        now = timezone.now()
-        return now - datetime.timedelta(days=1) <= self.post_time <= now
+    # @admin.display(
+    #     boolean=True,
+    #     ordering="post_time",
+    #     description="Posted recently?",
+    # )
+    # def was_posted_recently(self):
+    #     now = timezone.now()
+    #     return now - datetime.timedelta(days=1) <= self.post_time <= now
