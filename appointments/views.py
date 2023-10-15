@@ -19,6 +19,7 @@ def _get_proc_body_adj() -> Tuple:
         random.choice(PROCEDURES),
     )
 
+
 def post_appointment(patient_name: str) -> Tuple:
     installation = vestaboard.Installable(
         ENV["KEY"], ENV["SECRET"], saveCredentials=False
@@ -32,6 +33,7 @@ def post_appointment(patient_name: str) -> Tuple:
     board.post(appointment)
     return appointment, now
 
+
 def insert_appointment_post(response: Tuple):
     row = AppointmentPosts(appointment=response[0], post_time=response[1])
     row.save()
@@ -43,9 +45,13 @@ def index(request):
         patient_name = request.POST['patient_name']
         if not patient_name:
             return HttpResponse('Please enter your name and press "Submit"...and we will make you submit.')
+
         response = post_appointment(patient_name)
         if not response[0]:
             return HttpResponse(f'FAILED to schedule an appointment for {patient_name}.')
+
+        delta = AppointmentPosts.latest_post_time_delta()
+        print(f"DELTA: {delta}")
         insert_appointment_post(response)
         return HttpResponse(f'Successfully scheduled an appointment: {response[0]}.')
     context ={}
