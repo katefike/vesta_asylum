@@ -14,7 +14,7 @@ from django.utils import timezone
 
 class AppointmentPosts(models.Model):
     appointment = models.CharField(max_length=132)
-    post_time = models.DateTimeField("time posted")
+    post_time = models.DateTimeField("time posted", auto_now_add=True)
 
     def __str__(self):
         return self.appointment

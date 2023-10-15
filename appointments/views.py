@@ -31,11 +31,11 @@ def post_appointment(patient_name: str) -> Tuple:
     procedure = _get_proc_body_adj()
     appointment = f"EMERGENCY PROCEDURES\n{date} {time}\n\nPATIENT: {patient_name}\n{procedure[0]} {procedure[1]}\n{procedure[2]}"
     board.post(appointment)
-    return appointment, now
+    return appointment
 
 
-def insert_appointment_post(response: Tuple):
-    row = AppointmentPosts(appointment=response[0], post_time=response[1])
+def insert_appointment_post(appointment: str):
+    row = AppointmentPosts(appointment=appointment)
     row.save()
     return row
 
@@ -46,14 +46,14 @@ def index(request):
         if not patient_name:
             return HttpResponse('Please enter your name and press "Submit"...and we will make you submit.')
 
-        response = post_appointment(patient_name)
-        if not response[0]:
+        appointment = post_appointment(patient_name)
+        if not appointment:
             return HttpResponse(f'FAILED to schedule an appointment for {patient_name}.')
 
         delta = AppointmentPosts.latest_post_time_delta()
         print(f"DELTA: {delta}")
-        insert_appointment_post(response)
-        return HttpResponse(f'Successfully scheduled an appointment: {response[0]}.')
+        insert_appointment_post(appointment)
+        return HttpResponse(f'Successfully scheduled an appointment: {appointment}.')
     context ={}
     context['form']= PatientNameForm()
     return render(request, "appointments/index.html", context)
