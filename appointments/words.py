@@ -93,5 +93,6 @@ PROCEDURES = [
     "gas treatment",
     "bloodletting",
     "cold douche",
-    "smoke inhalation"
+    "smoke inhalation",
+    "surgery"
 ]
