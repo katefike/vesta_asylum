@@ -32,7 +32,7 @@ def post_appointment(patient_name: str) -> Tuple:
     board.post(appointment)
     return appointment, now
 
-def insert_appointment(response: Tuple):
+def insert_appointment_post(response: Tuple):
     row = AppointmentPosts(appointment=response[0], post_time=response[1])
     row.save()
     return row
@@ -46,7 +46,7 @@ def index(request):
         response = post_appointment(patient_name)
         if not response[0]:
             return HttpResponse(f'FAILED to schedule an appointment for {patient_name}.')
-        insert_appointment(response)
+        insert_appointment_post(response)
         return HttpResponse(f'Successfully scheduled an appointment: {response[0]}.')
     context ={}
     context['form']= PatientNameForm()
