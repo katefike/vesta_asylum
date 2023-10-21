@@ -43,10 +43,11 @@ def insert_appointment_post(appointment: str):
 def index(request):
     if request.method == 'POST':
         delta = AppointmentPosts.latest_post_time_delta()
-        if delta < timedelta(minutes=2):
-            remaining_time = timedelta(minutes=2) - delta
+        NEW_SUBMISSION_WAIT_SEC = int(ENV["NEW_SUBMISSION_WAIT_SEC"])
+        if delta < timedelta(seconds=NEW_SUBMISSION_WAIT_SEC):
+            remaining_time = timedelta(seconds=NEW_SUBMISSION_WAIT_SEC) - delta
             remaining_seconds = int(remaining_time.total_seconds())
-            return HttpResponse(f'An appointment stays on the board for 2 minutes. Re-submit in {remaining_seconds} seconds.')
+            return HttpResponse(f'An appointment stays on the board for {NEW_SUBMISSION_WAIT_SEC} seconds. Re-submit in {remaining_seconds} seconds.')
 
         patient_name = request.POST['patient_name']
         if not patient_name:
